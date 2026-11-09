@@ -1,0 +1,30 @@
+# [Define404] pulse 예시 설정. 운영 값은 wrangler.prod.toml 에 두고 저장소에 올리지 않는다.
+name = "pulse"
+main = "src/index.js"
+workers_dev = true
+compatibility_date = "2026-04-15"
+
+[vars]
+# 날짜를 자르는 시간대(분). 0 = UTC, 540 = 서울, 420 = 하노이
+TZ_OFFSET_MINUTES = 0
+
+# 신호를 받을 사이트 이름과 출처(scheme + host). 목록에 없는 출처의 신호는 403으로 거절한다.
+[vars.SITES]
+my-site = ["https://example.com", "https://www.example.com"]
+
+# 신호 받기 호출 한도(선택). 접속 주소 하나당 60초에 60건. 빼면 한도 없이 받는다.
+[[ratelimits]]
+name = "LIMITER"
+namespace_id = "1001"
+simple = { limit = 60, period = 60 }
+
+[[durable_objects.bindings]]
+name = "STORE"
+class_name = "Store"
+
+[[migrations]]
+tag = "v1"
+new_sqlite_classes = ["Store"]
+
+[observability]
+enabled = true

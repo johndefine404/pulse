@@ -1,0 +1,17 @@
+{
+  "name": "pulse",
+  "version": "0.1.0",
+  "private": true,
+  "description": "사람만 세는 방문 집계. Cloudflare Workers 하나로 돌아가는 쿠키 없는 방문 분석",
+  "author": "Define404 <john@define404.com>",
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "deploy:prod": "wrangler deploy -c wrangler.prod.toml"
+  },
+  "devDependencies": {
+    "wrangler": "^4.81.1"
+  }
+}
